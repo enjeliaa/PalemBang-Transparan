@@ -1,10 +1,12 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Lock } from "lucide-react";
 
 export default function AdminLoginPage() {
   const [error, setError] = useState("");
+  const searchParams = useSearchParams();
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -31,7 +33,7 @@ export default function AdminLoginPage() {
       return;
     }
 
-    window.location.href = "/admin/dashboard";
+    window.location.href = searchParams.get("next") || "/admin/dashboard";
   }
 
   return (
