@@ -1,56 +1,39 @@
 # PalemBang
 
-Tagline: **Palembang Terbuka, Palembang Maju**
+PalemBang adalah website transparansi pembangunan Kota Palembang. Website ini menampilkan informasi proyek, progres anggaran, komentar anonim warga, dan dashboard admin untuk pengelolaan konten.
 
-PalemBang adalah portal transparansi Pemerintah Kota Palembang untuk mempublikasikan progress pembangunan fasilitas publik, realisasi APBD, dan aspirasi warga secara anonim.
+Tagline: **Palembang Terbuka, Palembang Maju**
 
 ## Fitur
 
-- Hero video Kota Palembang dengan CTA.
-- Navbar sticky responsif dan breaking news ticker.
-- Grid postingan ala portal berita.
-- Detail artikel dengan hero image, video embed, status proyek, dan widget anggaran.
-- Komentar anonim tanpa login, username konsisten via localStorage.
-- Filter kata terlarang Bahasa Indonesia dengan sensor otomatis.
-- Admin dashboard, form postingan dengan TipTap, moderasi komentar, dan analitik keyword.
-- Login admin pemerintah untuk CRUD dan upload media.
-- Supabase schema, RLS, seed data, dan storage bucket.
+- Halaman publik berisi hero, breaking news, grid postingan, dan detail artikel.
+- Widget anggaran untuk menampilkan alokasi, realisasi, dan progres proyek.
+- Komentar anonim warga tanpa login.
+- Sensor otomatis untuk kata terlarang.
+- Dashboard admin untuk membuat, mengedit, menghapus postingan, dan upload media.
+- Analitik keyword dari komentar warga.
+- Integrasi Supabase untuk database dan storage.
 
 ## Tech Stack
 
-- Next.js App Router
+- Next.js
 - TypeScript
 - Tailwind CSS
-- Supabase PostgreSQL + Storage
-- NextAuth.js
+- Supabase
+- NextAuth
 - TipTap
 - Recharts
 - Vercel
 
-## Setup Lokal
+## Menjalankan Project
+
+Install dependency:
 
 ```bash
 npm install
-cp .env.example .env.local
-npm run dev
 ```
 
-Buka `http://localhost:3000`.
-
-Jika Supabase belum diisi, aplikasi tetap bisa demo CRUD admin secara lokal:
-
-- Postingan tersimpan di `data/local-db.json`.
-- Upload foto/video tersimpan di `public/uploads/posts`.
-- Untuk production/Vercel, gunakan Supabase karena file lokal Vercel tidak persisten.
-
-Demo admin:
-
-```text
-Email: admin@palembang.go.id
-Password: PalemBang#2026
-```
-
-## Environment Variables
+Buat file `.env.local`:
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=
@@ -63,48 +46,51 @@ ADMIN_PASSWORD_HASH=
 ANTHROPIC_API_KEY=
 ```
 
-Generate secret:
+Jalankan development server:
 
 ```bash
-openssl rand -base64 32
+npm run dev
 ```
 
-Generate password hash:
+Buka:
 
-```bash
-node -e "const bcrypt=require('bcryptjs'); bcrypt.hash('PasswordAman#2026',10).then(console.log)"
+```text
+http://localhost:3000
+```
+
+## Admin
+
+Halaman login admin:
+
+```text
+/admin/login
+```
+
+Akun demo:
+
+```text
+Email: admin@palembang.go.id
+Password: PalemBang#2026
 ```
 
 ## Supabase
 
-1. Buat project di Supabase.
-2. Buka SQL Editor.
-3. Jalankan isi file `supabase/schema-and-seed.sql`.
-4. Salin Project URL dan anon key ke `.env.local`.
-5. Untuk fitur CRUD admin dan upload server-side, salin `service_role key` ke `SUPABASE_SERVICE_ROLE_KEY`. Jangan pernah expose key ini ke frontend.
+Jalankan file SQL berikut di Supabase SQL Editor:
 
-## Deployment Vercel
-
-```bash
-git init
-git add .
-git commit -m "initial commit"
-git branch -M main
-git remote add origin https://github.com/username/palembang-transparan.git
-git push -u origin main
+```text
+supabase/schema-and-seed.sql
 ```
 
-Di Vercel:
+File tersebut membuat tabel, policy, bucket storage, dan data awal.
 
-1. New Project.
-2. Import repository `palembang-transparan`.
-3. Masukkan environment variables yang sama dengan `.env.local`.
-4. Klik Deploy.
+## Deploy
 
-Link live akan berbentuk `https://palembang-transparan.vercel.app`.
+Project ini dapat dideploy ke Vercel. Pastikan semua environment variables sudah diisi di Vercel sebelum deploy.
 
-## Proposal Singkat
+```bash
+git add .
+git commit -m "update project"
+git push
+```
 
-Latar belakang: warga kesulitan membaca dokumen APBD dan progress fasilitas publik.  
-Solusi: portal berita resmi dengan data anggaran, status pekerjaan, komentar anonim, dan analitik aspirasi.  
-Pengembangan berikutnya: integrasi penuh CRUD Supabase, dashboard role editor, notifikasi progres, dan ringkasan AI mingguan berbasis Anthropic Claude.
+Vercel akan melakukan deploy otomatis setelah push ke GitHub.
