@@ -30,6 +30,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ url: data.publicUrl, path: storagePath });
   }
 
+  if (process.env.VERCEL === "1") {
+    return NextResponse.json(
+      { error: "Supabase Storage belum dikonfigurasi. Isi SUPABASE_SERVICE_ROLE_KEY di Vercel." },
+      { status: 500 },
+    );
+  }
+
   const uploadDirectory = path.join(process.cwd(), "public", "uploads", "posts");
   await mkdir(uploadDirectory, { recursive: true });
   const fileName = `${crypto.randomUUID()}.${extension}`;

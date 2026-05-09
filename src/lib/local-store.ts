@@ -11,6 +11,15 @@ type LocalDatabase = {
 
 const dataDirectory = path.join(process.cwd(), "data");
 const databasePath = path.join(dataDirectory, "local-db.json");
+const isVercel = process.env.VERCEL === "1";
+
+function getDemoDatabase(): LocalDatabase {
+  return {
+    posts: demoPosts,
+    budgetItems: demoBudgetItems,
+    comments: demoComments,
+  };
+}
 
 async function ensureLocalDatabase() {
   await mkdir(dataDirectory, { recursive: true });
@@ -35,12 +44,16 @@ async function ensureLocalDatabase() {
 }
 
 export async function readLocalDatabase(): Promise<LocalDatabase> {
+  if (isVercel) return getDemoDatabase();
+
   await ensureLocalDatabase();
   const content = await readFile(databasePath, "utf8");
   return JSON.parse(content) as LocalDatabase;
 }
 
 async function writeLocalDatabase(database: LocalDatabase) {
+  if (isVercel) return;
+
   await ensureLocalDatabase();
   await writeFile(databasePath, JSON.stringify(database, null, 2), "utf8");
 }
