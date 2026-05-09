@@ -169,6 +169,28 @@ export const demoComments: Comment[] = [
     "created_at": "2026-05-09T13:59:11.202Z"
   },
   {
+    "id": "c-drainase-3",
+    "post_id": "27c6664e-55d9-43a4-8db8-23344f7fa08f",
+    "anonymous_name": "Warga Palembang #3074",
+    "content_raw": "Di depan ruko lama air sering mengalir lambat. Kalau bisa sedimen di saluran dibersihkan sampai ke hilir.",
+    "content_filtered": "Di depan ruko lama air sering mengalir lambat. Kalau bisa sedimen di saluran dibersihkan sampai ke hilir.",
+    "is_filtered": false,
+    "is_pinned": false,
+    "is_deleted": false,
+    "created_at": "2026-05-09T12:45:00.000Z"
+  },
+  {
+    "id": "c-drainase-4",
+    "post_id": "27c6664e-55d9-43a4-8db8-23344f7fa08f",
+    "anonymous_name": "Warga Palembang #5842",
+    "content_raw": "Tolong ada jadwal pembersihan rutin, jangan hanya setelah banjir besar baru ditinjau.",
+    "content_filtered": "Tolong ada jadwal pembersihan rutin, jangan hanya setelah banjir besar baru ditinjau.",
+    "is_filtered": false,
+    "is_pinned": false,
+    "is_deleted": false,
+    "created_at": "2026-05-09T11:30:00.000Z"
+  },
+  {
     "id": "c-sampah-1",
     "post_id": "post-1",
     "anonymous_name": "Warga Palembang #7321",
@@ -190,6 +212,28 @@ export const demoComments: Comment[] = [
     "is_pinned": false,
     "is_deleted": false,
     "created_at": "2026-05-09T12:20:00.000Z"
+  },
+  {
+    "id": "c-sampah-3",
+    "post_id": "post-1",
+    "anonymous_name": "Warga Palembang #6390",
+    "content_raw": "Mohon warga sekitar lokasi proyek diberi informasi dampak bau dan lalu lintas truk sampah.",
+    "content_filtered": "Mohon warga sekitar lokasi proyek diberi informasi dampak bau dan lalu lintas truk sampah.",
+    "is_filtered": false,
+    "is_pinned": false,
+    "is_deleted": false,
+    "created_at": "2026-05-09T10:25:00.000Z"
+  },
+  {
+    "id": "c-sampah-4",
+    "post_id": "post-1",
+    "anonymous_name": "Warga Palembang #2518",
+    "content_raw": "Kalau PSEL berjalan, tolong tetap ada edukasi pemilahan sampah dari rumah.",
+    "content_filtered": "Kalau PSEL berjalan, tolong tetap ada edukasi pemilahan sampah dari rumah.",
+    "is_filtered": false,
+    "is_pinned": false,
+    "is_deleted": false,
+    "created_at": "2026-05-09T09:00:00.000Z"
   },
   {
     "id": "c-sekolah-1",
@@ -215,15 +259,71 @@ export const demoComments: Comment[] = [
     "created_at": "2026-05-09T10:10:00.000Z"
   },
   {
+    "id": "c-sekolah-3",
+    "post_id": "post-2",
+    "anonymous_name": "Warga Palembang #7720",
+    "content_raw": "Trotoar dekat sekolah perlu dirapikan supaya anak-anak tidak turun ke badan jalan.",
+    "content_filtered": "Trotoar dekat sekolah perlu dirapikan supaya anak-anak tidak turun ke badan jalan.",
+    "is_filtered": false,
+    "is_pinned": false,
+    "is_deleted": false,
+    "created_at": "2026-05-09T09:30:00.000Z"
+  },
+  {
+    "id": "c-sekolah-4",
+    "post_id": "post-2",
+    "anonymous_name": "Warga Palembang #4097",
+    "content_raw": "Lampu lalu lintas atau petugas pagi hari sangat membantu karena kendaraan padat dari dua arah.",
+    "content_filtered": "Lampu lalu lintas atau petugas pagi hari sangat membantu karena kendaraan padat dari dua arah.",
+    "is_filtered": false,
+    "is_pinned": false,
+    "is_deleted": false,
+    "created_at": "2026-05-09T08:05:00.000Z"
+  },
+  {
     "id": "c-cfn-1",
     "post_id": "post-3",
     "anonymous_name": "Warga Palembang #1190",
     "content_raw": "Car Free Night bagus, tapi parkir liar di sekitar Jalan Kolonel Atmo bikin macet setelah acara selesai.",
     "content_filtered": "Car Free Night bagus, tapi parkir liar di sekitar Jalan Kolonel Atmo bikin macet setelah acara selesai.",
     "is_filtered": false,
+    "is_pinned": true,
+    "is_deleted": false,
+    "admin_reply": "Catatan parkir liar akan menjadi bahan evaluasi pengaturan akses keluar kegiatan.",
+    "created_at": "2026-05-08T20:15:00.000Z"
+  },
+  {
+    "id": "c-cfn-2",
+    "post_id": "post-3",
+    "anonymous_name": "Warga Palembang #6115",
+    "content_raw": "Mohon jalur alternatif diumumkan sebelum acara supaya warga tidak bingung saat jalan ditutup.",
+    "content_filtered": "Mohon jalur alternatif diumumkan sebelum acara supaya warga tidak bingung saat jalan ditutup.",
+    "is_filtered": false,
     "is_pinned": false,
     "is_deleted": false,
-    "created_at": "2026-05-08T20:15:00.000Z"
+    "created_at": "2026-05-08T19:40:00.000Z"
+  },
+  {
+    "id": "c-cfn-3",
+    "post_id": "post-3",
+    "anonymous_name": "Warga Palembang #9056",
+    "content_raw": "CFD menuju Ampera perlu toilet portabel dan tempat sampah tambahan.",
+    "content_filtered": "CFD menuju Ampera perlu toilet portabel dan tempat sampah tambahan.",
+    "is_filtered": false,
+    "is_pinned": false,
+    "is_deleted": false,
+    "created_at": "2026-05-08T18:25:00.000Z"
+  },
+  {
+    "id": "c-cfn-4",
+    "post_id": "post-3",
+    "anonymous_name": "Warga Palembang #2764",
+    "content_raw": "Saya setuju dilanjutkan, asal pedagang dan pejalan kaki sama-sama ditata rapi.",
+    "content_filtered": "Saya setuju dilanjutkan, asal pedagang dan pejalan kaki sama-sama ditata rapi.",
+    "is_filtered": false,
+    "is_pinned": false,
+    "is_deleted": false,
+    "created_at": "2026-05-08T17:05:00.000Z"
   },
   {
     "id": "c-bundaran-1",
@@ -232,9 +332,43 @@ export const demoComments: Comment[] = [
     "content_raw": "Lampu jalan di sekitar bundaran sudah bagus, tapi toilet umum dan tempat sampah perlu ditambah.",
     "content_filtered": "Lampu jalan di sekitar bundaran sudah bagus, tapi toilet umum dan tempat sampah perlu ditambah.",
     "is_filtered": false,
+    "is_pinned": true,
+    "is_deleted": false,
+    "admin_reply": "Kebutuhan fasilitas pendukung akan dicatat untuk evaluasi pengelolaan kawasan.",
+    "created_at": "2026-05-08T13:35:00.000Z"
+  },
+  {
+    "id": "c-bundaran-2",
+    "post_id": "post-4",
+    "anonymous_name": "Warga Palembang #7002",
+    "content_raw": "Area air mancur ramai malam hari, mohon keamanan dan kebersihan tetap dijaga.",
+    "content_filtered": "Area air mancur ramai malam hari, mohon keamanan dan kebersihan tetap dijaga.",
+    "is_filtered": false,
     "is_pinned": false,
     "is_deleted": false,
-    "created_at": "2026-05-08T13:35:00.000Z"
+    "created_at": "2026-05-08T12:40:00.000Z"
+  },
+  {
+    "id": "c-bundaran-3",
+    "post_id": "post-4",
+    "anonymous_name": "Warga Palembang #8461",
+    "content_raw": "Kalau bisa ada jalur pedestrian yang lebih jelas agar pengunjung tidak menyeberang sembarangan.",
+    "content_filtered": "Kalau bisa ada jalur pedestrian yang lebih jelas agar pengunjung tidak menyeberang sembarangan.",
+    "is_filtered": false,
+    "is_pinned": false,
+    "is_deleted": false,
+    "created_at": "2026-05-08T11:30:00.000Z"
+  },
+  {
+    "id": "c-bundaran-4",
+    "post_id": "post-4",
+    "anonymous_name": "Warga Palembang #3158",
+    "content_raw": "Tempatnya bagus untuk keluarga, tapi parkir perlu diatur supaya tidak macet di sekitar bundaran.",
+    "content_filtered": "Tempatnya bagus untuk keluarga, tapi parkir perlu diatur supaya tidak macet di sekitar bundaran.",
+    "is_filtered": false,
+    "is_pinned": false,
+    "is_deleted": false,
+    "created_at": "2026-05-08T10:15:00.000Z"
   },
   {
     "id": "c-jalan-1",
@@ -258,5 +392,27 @@ export const demoComments: Comment[] = [
     "is_pinned": false,
     "is_deleted": false,
     "created_at": "2026-05-08T08:25:00.000Z"
+  },
+  {
+    "id": "c-jalan-3",
+    "post_id": "post-5",
+    "anonymous_name": "Warga Palembang #6633",
+    "content_raw": "Terima kasih jalannya sudah diperbaiki. Marka tepi jalan mungkin bisa ditambah untuk malam hari.",
+    "content_filtered": "Terima kasih jalannya sudah diperbaiki. Marka tepi jalan mungkin bisa ditambah untuk malam hari.",
+    "is_filtered": false,
+    "is_pinned": false,
+    "is_deleted": false,
+    "created_at": "2026-05-08T07:55:00.000Z"
+  },
+  {
+    "id": "c-jalan-4",
+    "post_id": "post-5",
+    "anonymous_name": "Warga Palembang #9901",
+    "content_raw": "Akses ke Al-Quran Akbar lebih lancar, tapi lampu jalan di beberapa titik masih kurang terang.",
+    "content_filtered": "Akses ke Al-Quran Akbar lebih lancar, tapi lampu jalan di beberapa titik masih kurang terang.",
+    "is_filtered": false,
+    "is_pinned": false,
+    "is_deleted": false,
+    "created_at": "2026-05-08T07:10:00.000Z"
   }
 ];
