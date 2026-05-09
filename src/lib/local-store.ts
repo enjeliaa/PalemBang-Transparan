@@ -61,13 +61,21 @@ async function writeLocalDatabase(database: LocalDatabase) {
 }
 
 async function writeDemoData(database: LocalDatabase) {
+  const deployDatabase: LocalDatabase = {
+    ...database,
+    posts: database.posts.map((post) => ({
+      ...post,
+      video_url: post.video_url?.startsWith("/uploads/") ? undefined : post.video_url,
+    })),
+  };
+
   const content = `import type { BudgetItem, Comment, Post } from "@/types";
 
-export const demoPosts: Post[] = ${JSON.stringify(database.posts, null, 2)};
+export const demoPosts: Post[] = ${JSON.stringify(deployDatabase.posts, null, 2)};
 
-export const demoBudgetItems: BudgetItem[] = ${JSON.stringify(database.budgetItems, null, 2)};
+export const demoBudgetItems: BudgetItem[] = ${JSON.stringify(deployDatabase.budgetItems, null, 2)};
 
-export const demoComments: Comment[] = ${JSON.stringify(database.comments, null, 2)};
+export const demoComments: Comment[] = ${JSON.stringify(deployDatabase.comments, null, 2)};
 `;
 
   await writeFile(demoDataPath, content, "utf8");

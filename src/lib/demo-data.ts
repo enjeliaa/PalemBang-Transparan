@@ -9,7 +9,6 @@ export const demoPosts: Post[] = [
     "excerpt": "Wali Kota Palembang, Ratu Dewa, meninjau sejumlah titik penyempitan aliran air di kawasan Angkatan 45 yang diduga menjadi penyebab banjir dan genangan air. Pemerintah Kota Palembang juga mendorong pembangunan kolam retensi bersama pemerintah provinsi sebagai solusi jangka panjang pengendalian banjir.",
     "content_html": "<p><strong>Wali Kota Palembang Tinjau Titik Penyempitan Aliran Air untuk Kurangi Banjir</strong></p><p>Wali Kota Palembang, <strong>Ratu Dewa</strong>, meninjau langsung sejumlah titik penyempitan aliran air di kawasan Angkatan 45 yang menjadi salah satu penyebab terjadinya banjir dan genangan air di wilayah sekitar.</p><p><strong>Latar Belakang Proyek</strong></p><p>Pemerintah Kota Palembang terus melakukan upaya penanganan banjir yang kerap terjadi saat hujan dengan intensitas tinggi. Salah satu fokus utama adalah normalisasi aliran drainase dan identifikasi titik penyumbatan maupun penyempitan saluran air di beberapa kawasan rawan genangan.</p><p>Kawasan Angkatan 45 menjadi perhatian khusus karena terdapat beberapa titik penyempitan aliran air yang menghambat arus drainase dan menyebabkan air meluap ke permukiman serta jalan utama ketika hujan deras turun.</p><p><strong>Detail Pekerjaan</strong></p><p>• Pemeriksaan titik penyempitan saluran air di kawasan Angkatan 45.<br>• Evaluasi kondisi drainase dan aliran air di area rawan banjir.<br>• Koordinasi penanganan genangan bersama dinas terkait.<br>• Rencana pembangunan kolam retensi untuk mengurangi debit genangan air.</p><p><strong>Progres Penanganan</strong></p><p>Pemerintah Kota Palembang telah melakukan peninjauan langsung di lapangan guna memastikan kondisi saluran air yang mengalami penyempitan. Langkah awal yang dilakukan diharapkan mampu mengurangi genangan air saat hujan lebat terjadi.</p><p>Selain itu, dukungan dari Pemerintah Provinsi Sumatera Selatan melalui rencana pembangunan kolam retensi juga diharapkan dapat membantu mengatasi beberapa titik banjir lainnya di Kota Palembang.</p><p><strong>Catatan Anggaran</strong></p><p>Pemerintah Kota Palembang masih melakukan koordinasi terkait kebutuhan anggaran penanganan drainase dan pembangunan infrastruktur pengendalian banjir. Detail nilai anggaran pembangunan kolam retensi dan normalisasi saluran air akan disesuaikan dengan hasil evaluasi teknis serta dukungan pemerintah provinsi.</p><p><strong>Total Alokasi:</strong> Dalam proses pembahasan<br><strong>Realisasi:</strong> Tahap peninjauan dan evaluasi lapangan<br><strong>Progres Persen:</strong> 15%</p><p><em>“Dengan langkah ini diharapkan dapat mengurangi genangan air saat hujan lebat turun.”</em></p>",
     "thumbnail_url": "/uploads/posts/fb372b75-5444-4edf-bf75-c4259cec7544.png",
-    "video_url": "/uploads/posts/79100f73-78a5-4577-8b80-3ffd06636bc8.mp4",
     "budget_total": 0,
     "budget_realized": 0,
     "progress_percent": 15,
@@ -25,7 +24,6 @@ export const demoPosts: Post[] = [
     "excerpt": "Wali Kota Palembang, Ratu Dewa, bersama tim dari Danantara meninjau langsung proyek Pengolahan Sampah Menjadi Energi Listrik (PSEL) di Kramasan, Kertapati. Proyek Strategis Nasional ini diharapkan mampu mengurangi timbunan sampah sekaligus menghasilkan energi terbarukan bagi Kota Palembang.",
     "content_html": "<p><strong>Pemkot Palembang Tinjau Proyek PSEL Kramasan untuk Atasi Darurat Sampah</strong></p><p>Wali Kota Palembang, <strong>Ratu Dewa</strong>, mendampingi tim dari Danantara melakukan peninjauan langsung ke lokasi Pengolahan Sampah Menjadi Energi Listrik (PSEL) di kawasan Kramasan, Kecamatan Kertapati, Palembang.</p><p>Proyek ini merupakan bagian dari <strong>Proyek Strategis Nasional (PSN)</strong> yang bertujuan mengatasi persoalan darurat sampah di sejumlah kota besar di Indonesia. Kota Palembang menjadi salah satu daerah yang ditunjuk dalam program pengolahan sampah berbasis energi terbarukan tersebut.</p><p><strong>Latar Belakang Proyek</strong></p><p>Tingginya volume sampah harian di Kota Palembang menjadi tantangan utama dalam pengelolaan lingkungan perkotaan. Pemerintah pusat bersama pemerintah daerah mendorong pembangunan fasilitas Pengolahan Sampah Menjadi Energi Listrik (PSEL) sebagai solusi jangka panjang untuk mengurangi timbunan sampah sekaligus menghasilkan energi alternatif ramah lingkungan.</p><p>Kawasan Kramasan, Kertapati dipilih sebagai lokasi pengembangan proyek karena memiliki potensi mendukung sistem pengolahan sampah terpadu dan kebutuhan infrastruktur energi kota.</p><p><strong>Detail Pekerjaan</strong></p><p>• Peninjauan lokasi pembangunan fasilitas PSEL di Kramasan.<br>• Koordinasi teknis bersama tim Danantara dan pihak terkait.<br>• Perencanaan sistem pengolahan sampah berbasis waste-to-energy.<br>• Pembangunan infrastruktur pengolahan limbah menjadi energi listrik.<br>• Persiapan integrasi pengelolaan sampah modern di Kota Palembang.</p><p><strong>Progres Proyek</strong></p><p>Saat ini proyek masih berada pada tahap peninjauan lapangan dan koordinasi awal antara pemerintah daerah, pemerintah pusat, serta pihak pelaksana proyek. Pemerintah Kota Palembang berharap pembangunan fasilitas ini dapat segera berjalan sesuai target nasional.</p><p>Program PSEL diharapkan mampu mengurangi volume sampah secara signifikan dan menghasilkan energi terbarukan yang bermanfaat bagi masyarakat Kota Palembang.</p><p><strong>Catatan Anggaran</strong></p><p>Detail nilai investasi dan pembiayaan proyek masih dalam tahap pembahasan bersama pemerintah pusat dan pihak terkait. Skema pendanaan diperkirakan melibatkan dukungan nasional karena proyek ini termasuk dalam kategori Proyek Strategis Nasional.</p><p><strong>Total Alokasi:</strong> Dalam proses pembahasan<br><strong>Realisasi:</strong> Tahap koordinasi dan peninjauan awal<br><strong>Progres Persen:</strong> 10%</p><p><em>“Semoga program ini dapat mengurangi timbunan sampah secara signifikan dan menghasilkan energi terbarukan.”</em></p>",
     "thumbnail_url": "/uploads/posts/d1c32777-354c-4a3f-82f7-95af97b0549f.png",
-    "video_url": "/uploads/posts/c93ca11c-54a4-4cf6-b43d-56f8e90137ad.mp4",
     "budget_total": 0,
     "budget_realized": 0,
     "progress_percent": 10,
@@ -46,8 +44,7 @@ export const demoPosts: Post[] = [
     "progress_percent": 20,
     "status": "planning",
     "published_at": "2026-04-28T10:30:00.000Z",
-    "author_name": "Pemerintah Kota Palembang",
-    "video_url": "/uploads/posts/f3152019-b5ce-485b-9b26-4cdc8d5934e5.mp4"
+    "author_name": "Pemerintah Kota Palembang"
   },
   {
     "id": "post-3",
@@ -62,8 +59,7 @@ export const demoPosts: Post[] = [
     "progress_percent": 90,
     "status": "done",
     "published_at": "2026-04-22T03:00:00.000Z",
-    "author_name": "Pemerintah Kota Palembang",
-    "video_url": "/uploads/posts/70f137da-f848-40fc-b97e-69b67045151e.mp4"
+    "author_name": "Pemerintah Kota Palembang"
   },
   {
     "id": "post-4",
@@ -78,8 +74,7 @@ export const demoPosts: Post[] = [
     "progress_percent": 100,
     "status": "done",
     "published_at": "2026-04-18T12:00:00.000Z",
-    "author_name": "Pemerintah Kota Palembang",
-    "video_url": "/uploads/posts/92e95c17-d179-4737-ba5e-f82633a5c315.mp4"
+    "author_name": "Pemerintah Kota Palembang"
   },
   {
     "id": "post-5",
@@ -94,8 +89,7 @@ export const demoPosts: Post[] = [
     "progress_percent": 100,
     "status": "ongoing",
     "published_at": "2026-04-12T07:30:00.000Z",
-    "author_name": "Pemerintah Kota Palembang",
-    "video_url": "/uploads/posts/f94820a6-6f88-43e6-9a5c-eca59da04237.mp4"
+    "author_name": "Pemerintah Kota Palembang"
   }
 ];
 

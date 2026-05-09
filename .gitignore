@@ -29,6 +29,7 @@
 !/public/uploads/
 !/public/uploads/posts/
 !/public/uploads/posts/**
+/public/uploads/posts/*.mp4
 
 # debug
 npm-debug.log*
