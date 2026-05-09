@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { Navbar } from "@/components/Navbar";
 import { CommentSection } from "@/components/CommentSection";
 import { BudgetWidget } from "@/components/BudgetWidget";
-import { getBudgetItems, getComments, getPostBySlug, getPosts } from "@/lib/data";
+import { getBudgetItems, getCommentsForPost, getPostBySlug, getPosts } from "@/lib/data";
 import { formatDate, isYoutubeEmbedUrl, normalizeVideoUrl, statusClass, statusLabel } from "@/lib/utils";
 
 type Props = {
@@ -33,7 +33,7 @@ export default async function PostDetailPage({ params }: Props) {
 
   const [budgetItems, comments] = await Promise.all([
     getBudgetItems(post.id),
-    getComments(post.id),
+    getCommentsForPost(post),
   ]);
   const videoUrl = normalizeVideoUrl(post.video_url);
 

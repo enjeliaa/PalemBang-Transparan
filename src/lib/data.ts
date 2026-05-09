@@ -76,6 +76,29 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
   return shouldUseSupabasePost(post, localPosts) ? post : fallback;
 }
 
+export async function getCommentsForPost(post: Post): Promise<Comment[]> {
+  const localPosts = await getLocalPosts();
+  const localPost = localPosts.find((item) => item.slug === post.slug);
+  const postIds = new Set([post.id, localPost?.id].filter(Boolean) as string[]);
+  const fallback = mergeComments(
+    [],
+    (await getLocalComments()).filter((comment) => postIds.has(comment.post_id)),
+  );
+
+  if (!hasSupabaseEnv || !supabase) return fallback;
+
+  const { data, error } = await supabase
+    .from("comments")
+    .select("*")
+    .in("post_id", [...postIds])
+    .eq("is_deleted", false)
+    .order("is_pinned", { ascending: false })
+    .order("created_at", { ascending: false });
+
+  if (error || !data?.length) return fallback;
+  return mergeComments(fallback, data as Comment[]);
+}
+
 export async function getBudgetItems(postId: string): Promise<BudgetItem[]> {
   const fallback = await getLocalBudgetItems(postId);
   if (!hasSupabaseEnv || !supabase) return fallback;

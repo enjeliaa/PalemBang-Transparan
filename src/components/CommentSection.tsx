@@ -61,8 +61,11 @@ export function CommentSection({ postId, initialComments }: { postId: string; in
     <section className="mt-10 rounded border border-zinc-200 bg-white p-5 shadow-sm">
       <div className="mb-5">
         <p className="text-sm font-black uppercase text-[#C8102E]">Aspirasi Warga</p>
-        <h2 className="font-serif text-3xl font-black text-[#1A1A2E]">Komentar Anonim</h2>
+        <h2 className="font-serif text-3xl font-black text-[#1A1A2E]">Semua Komentar Anonim</h2>
         <p className="mt-2 text-sm text-zinc-500">Nama kamu otomatis disimpan di perangkat ini sebagai {anonymousName}.</p>
+        <p className="mt-1 text-sm font-bold text-[#1A1A2E]">
+          {sortedComments.length} komentar ditampilkan untuk postingan ini.
+        </p>
       </div>
 
       <form onSubmit={submitComment} className="mb-6">
@@ -80,7 +83,7 @@ export function CommentSection({ postId, initialComments }: { postId: string; in
       </form>
 
       <div className="space-y-4">
-        {sortedComments.map((comment) => (
+        {sortedComments.length > 0 ? sortedComments.map((comment) => (
           <article key={comment.id} className={`border-l-4 ${comment.is_pinned ? "border-[#F5A623]" : "border-[#C8102E]"} rounded-r bg-zinc-50 p-4`}>
             <div className="flex items-start gap-3">
               <div className="grid size-10 shrink-0 place-items-center rounded-full bg-[#1A1A2E] font-black text-white">{comment.anonymous_name.slice(-4, -3)}</div>
@@ -101,7 +104,11 @@ export function CommentSection({ postId, initialComments }: { postId: string; in
               </div>
             </div>
           </article>
-        ))}
+        )) : (
+          <div className="rounded border border-dashed border-zinc-300 p-5 text-center text-sm font-bold text-zinc-500">
+            Belum ada komentar untuk postingan ini.
+          </div>
+        )}
       </div>
     </section>
   );
