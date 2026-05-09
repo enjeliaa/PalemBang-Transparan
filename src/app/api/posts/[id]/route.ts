@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { deleteLocalPost, updateLocalPost } from "@/lib/local-store";
 import { isAdmin } from "@/lib/permissions";
 import { hasSupabaseAdminEnv, supabaseAdmin } from "@/lib/supabase-admin";
+import { normalizeVideoUrl } from "@/lib/utils";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -14,6 +15,7 @@ export async function PATCH(request: Request, { params }: Props) {
 
   const { id } = await params;
   const body = await request.json();
+  if ("video_url" in body) body.video_url = normalizeVideoUrl(body.video_url);
 
   if (hasSupabaseAdminEnv && supabaseAdmin) {
     const { data, error } = await supabaseAdmin

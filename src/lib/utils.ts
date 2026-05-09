@@ -59,3 +59,37 @@ export function statusClass(status: string) {
 
   return classes[status as keyof typeof classes] ?? "bg-zinc-100 text-zinc-700";
 }
+
+export function normalizeVideoUrl(value?: string) {
+  const url = value?.trim();
+  if (!url) return undefined;
+
+  try {
+    const parsedUrl = new URL(url);
+    const hostname = parsedUrl.hostname.replace(/^www\./, "");
+
+    if (hostname === "youtu.be") {
+      const videoId = parsedUrl.pathname.split("/").filter(Boolean)[0];
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+    }
+
+    if (hostname === "youtube.com" || hostname === "m.youtube.com") {
+      if (parsedUrl.pathname.startsWith("/embed/")) return url;
+      if (parsedUrl.pathname.startsWith("/shorts/")) {
+        const videoId = parsedUrl.pathname.split("/").filter(Boolean)[1];
+        return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+      }
+
+      const videoId = parsedUrl.searchParams.get("v");
+      return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+    }
+  } catch {
+    return url;
+  }
+
+  return url;
+}
+
+export function isYoutubeEmbedUrl(value?: string) {
+  return Boolean(value?.includes("youtube.com/embed/"));
+}

@@ -3,6 +3,7 @@ import type { Post } from "@/types";
 import { createLocalPost } from "@/lib/local-store";
 import { isAdmin } from "@/lib/permissions";
 import { hasSupabaseAdminEnv, supabaseAdmin } from "@/lib/supabase-admin";
+import { normalizeVideoUrl } from "@/lib/utils";
 
 export async function POST(request: Request) {
   if (!(await isAdmin())) {
@@ -17,7 +18,7 @@ export async function POST(request: Request) {
     excerpt: body.excerpt,
     content_html: body.content_html,
     thumbnail_url: body.thumbnail_url,
-    video_url: body.video_url || undefined,
+    video_url: normalizeVideoUrl(body.video_url),
     budget_total: body.budget_total,
     budget_realized: body.budget_realized,
     progress_percent: body.progress_percent,

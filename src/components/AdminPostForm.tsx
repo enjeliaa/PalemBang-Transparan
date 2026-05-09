@@ -134,7 +134,7 @@ export function AdminPostForm({ mode, post }: Props) {
           <input name="thumbnail_url" value={thumbnailUrl} onChange={(event) => setThumbnailUrl(event.target.value)} className="mt-4 w-full rounded border border-zinc-300 px-3 py-3" placeholder="URL foto thumbnail" />
           <label className="mt-3 block text-xs font-black uppercase text-zinc-500">Upload Foto</label>
           <input type="file" accept="image/*" onChange={(event) => event.target.files?.[0] && uploadMedia(event.target.files[0], "thumbnail")} className="mt-2 w-full rounded border border-dashed border-zinc-300 p-4 text-sm" />
-          <input name="video_url" value={videoUrl} onChange={(event) => setVideoUrl(event.target.value)} className="mt-4 w-full rounded border border-zinc-300 px-3 py-3" placeholder="URL embed video YouTube / video HTML5" />
+          <input name="video_url" value={videoUrl} onChange={(event) => setVideoUrl(event.target.value)} className="mt-4 w-full rounded border border-zinc-300 px-3 py-3" placeholder="URL YouTube / youtu.be / video HTML5" />
           <label className="mt-3 block text-xs font-black uppercase text-zinc-500">Upload Video</label>
           <input type="file" accept="video/*" onChange={(event) => event.target.files?.[0] && uploadMedia(event.target.files[0], "video")} className="mt-2 w-full rounded border border-dashed border-zinc-300 p-4 text-sm" />
           <p className="mt-2 text-xs text-zinc-500">File dikirim ke API `/api/upload` dan saat production disimpan ke Supabase Storage bucket `palembang-media`.</p>

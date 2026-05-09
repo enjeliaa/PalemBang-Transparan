@@ -4,7 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { CommentSection } from "@/components/CommentSection";
 import { BudgetWidget } from "@/components/BudgetWidget";
 import { getBudgetItems, getComments, getPostBySlug, getPosts } from "@/lib/data";
-import { formatDate, statusClass, statusLabel } from "@/lib/utils";
+import { formatDate, isYoutubeEmbedUrl, normalizeVideoUrl, statusClass, statusLabel } from "@/lib/utils";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -35,6 +35,7 @@ export default async function PostDetailPage({ params }: Props) {
     getBudgetItems(post.id),
     getComments(post.id),
   ]);
+  const videoUrl = normalizeVideoUrl(post.video_url);
 
   return (
     <>
@@ -57,10 +58,10 @@ export default async function PostDetailPage({ params }: Props) {
               <span className="rounded bg-zinc-100 px-3 py-1 text-sm font-bold text-zinc-600">Progress anggaran {post.progress_percent}%</span>
             </div>
             <div className="prose max-w-none text-zinc-700" dangerouslySetInnerHTML={{ __html: post.content_html }} />
-            {post.video_url?.includes("youtube.com/embed") ? (
-              <iframe className="mt-8 aspect-video w-full rounded border border-zinc-200" src={post.video_url} title={post.title} allowFullScreen />
-            ) : post.video_url ? (
-              <video className="mt-8 aspect-video w-full rounded border border-zinc-200 bg-black" src={post.video_url} controls />
+            {isYoutubeEmbedUrl(videoUrl) ? (
+              <iframe className="mt-8 aspect-video w-full rounded border border-zinc-200" src={videoUrl} title={post.title} allowFullScreen />
+            ) : videoUrl ? (
+              <video className="mt-8 aspect-video w-full rounded border border-zinc-200 bg-black" src={videoUrl} controls />
             ) : null}
             <CommentSection postId={post.id} initialComments={comments} />
           </article>
