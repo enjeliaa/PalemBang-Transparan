@@ -1,4 +1,5 @@
 import { AnalyticsChart } from "@/components/AnalyticsChart";
+import { AiSummaryPanel } from "@/components/AiSummaryPanel";
 import { getComments } from "@/lib/data";
 import { getKeywordAnalytics } from "@/lib/analytics";
 import { isAdmin } from "@/lib/permissions";
@@ -27,9 +28,6 @@ export default async function AnalyticsPage() {
       <section className="rounded border border-zinc-200 bg-white p-5 shadow-sm">
         <div className="mb-4 flex items-center justify-between">
           <h3 className="font-serif text-2xl font-black">Tabel Tren Mingguan</h3>
-          <form action="/api/ai-summary">
-            <button className="rounded bg-[#1A1A2E] px-4 py-2 text-sm font-black text-white">Refresh Ringkasan AI</button>
-          </form>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[620px] text-left text-sm">
@@ -62,12 +60,7 @@ export default async function AnalyticsPage() {
         </div>
       </section>
 
-      <section className="rounded border border-green-200 bg-green-50 p-5">
-        <p className="text-sm font-black uppercase text-green-700">Ringkasan AI Demo</p>
-        <p className="mt-2 leading-7 text-green-900">
-          Dashboard ini tidak membuat isu sendiri. Kata seperti banjir, korupsi, narkoba, atau jalan rusak baru muncul jika warga menuliskannya di kolom komentar.
-        </p>
-      </section>
+      <AiSummaryPanel />
     </div>
   );
 }
