@@ -13,7 +13,7 @@ export function DeletePostButton({ postId }: { postId: string }) {
     if (!confirmed) return;
 
     setLoading(true);
-    const response = await fetch(`/api/posts/${postId}`, { method: "DELETE" });
+    const response = await fetch(`/api/posts/${postId}`, { method: "DELETE", credentials: "include" });
     setLoading(false);
 
     if (!response.ok) {

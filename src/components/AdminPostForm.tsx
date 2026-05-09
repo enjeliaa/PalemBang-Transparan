@@ -17,7 +17,21 @@ export function AdminPostForm({ mode, post }: Props) {
   const [thumbnailUrl, setThumbnailUrl] = useState(post?.thumbnail_url ?? "");
   const [videoUrl, setVideoUrl] = useState(post?.video_url ?? "");
 
+  async function getErrorMessage(response: Response, fallback: string) {
+    try {
+      const data = await response.json();
+      return typeof data.error === "string" ? data.error : fallback;
+    } catch {
+      return fallback;
+    }
+  }
+
   async function uploadMedia(file: File, target: "thumbnail" | "video") {
+    if (target === "video" && file.size > 4 * 1024 * 1024) {
+      setMessage("Upload video besar tidak bisa lewat Vercel. Masukkan URL YouTube/embed atau URL video dari Supabase Storage.");
+      return;
+    }
+
     setMessage("Mengupload media...");
     const formData = new FormData();
     formData.append("file", file);
@@ -25,10 +39,11 @@ export function AdminPostForm({ mode, post }: Props) {
     const response = await fetch("/api/upload", {
       method: "POST",
       body: formData,
+      credentials: "include",
     });
 
     if (!response.ok) {
-      setMessage("Upload gagal. Pastikan login sebagai admin dan Supabase Storage sudah siap.");
+      setMessage(await getErrorMessage(response, "Upload gagal. Pastikan login sebagai admin dan Supabase Storage sudah siap."));
       return;
     }
 
@@ -63,10 +78,11 @@ export function AdminPostForm({ mode, post }: Props) {
       method: mode === "create" ? "POST" : "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
+      credentials: "include",
     });
 
     if (!response.ok) {
-      setMessage("Gagal menyimpan. Pastikan kamu login sebagai admin pemerintah.");
+      setMessage(await getErrorMessage(response, "Gagal menyimpan. Pastikan kamu login sebagai admin pemerintah."));
       setLoading(false);
       return;
     }

@@ -9,6 +9,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Hanya admin pemerintah yang boleh upload media." }, { status: 403 });
   }
 
+  if (process.env.VERCEL === "1" && process.env.CONTENT_SOURCE !== "supabase") {
+    return NextResponse.json(
+      {
+        error:
+          "Upload dari admin Vercel butuh mode Supabase. Untuk mode konten lokal, upload dari localhost lalu commit/push, atau pakai URL YouTube/embed.",
+      },
+      { status: 500 },
+    );
+  }
+
   const formData = await request.formData();
   const file = formData.get("file");
 
@@ -32,7 +42,7 @@ export async function POST(request: Request) {
 
   if (process.env.VERCEL === "1") {
     return NextResponse.json(
-      { error: "Supabase Storage belum dikonfigurasi. Isi SUPABASE_SERVICE_ROLE_KEY di Vercel." },
+      { error: "Upload file dari Vercel butuh Supabase Storage. Untuk video, pakai URL YouTube/embed atau URL publik dari Supabase Storage." },
       { status: 500 },
     );
   }
