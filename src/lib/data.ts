@@ -2,8 +2,10 @@ import { getLocalBudgetItems, getLocalComments, getLocalPosts } from "@/lib/loca
 import { hasSupabaseEnv, supabase } from "@/lib/supabase";
 import type { BudgetItem, Comment, Post } from "@/types";
 
+const useSupabaseContent = process.env.CONTENT_SOURCE === "supabase";
+
 export async function getPosts(): Promise<Post[]> {
-  if (!hasSupabaseEnv || !supabase) return getLocalPosts();
+  if (!useSupabaseContent || !hasSupabaseEnv || !supabase) return getLocalPosts();
 
   const { data, error } = await supabase
     .from("posts")
@@ -17,7 +19,7 @@ export async function getPosts(): Promise<Post[]> {
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   const localPosts = await getLocalPosts();
   const fallback = localPosts.find((post) => post.slug === slug) ?? null;
-  if (!hasSupabaseEnv || !supabase) return fallback;
+  if (!useSupabaseContent || !hasSupabaseEnv || !supabase) return fallback;
 
   const { data, error } = await supabase
     .from("posts")
@@ -31,7 +33,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
 
 export async function getBudgetItems(postId: string): Promise<BudgetItem[]> {
   const fallback = await getLocalBudgetItems(postId);
-  if (!hasSupabaseEnv || !supabase) return fallback;
+  if (!useSupabaseContent || !hasSupabaseEnv || !supabase) return fallback;
 
   const { data, error } = await supabase
     .from("budget_items")
@@ -45,7 +47,7 @@ export async function getBudgetItems(postId: string): Promise<BudgetItem[]> {
 export async function getComments(postId?: string): Promise<Comment[]> {
   const fallback = await getLocalComments(postId);
 
-  if (!hasSupabaseEnv || !supabase) return fallback;
+  if (!useSupabaseContent || !hasSupabaseEnv || !supabase) return fallback;
 
   let query = supabase
     .from("comments")

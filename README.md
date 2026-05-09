@@ -90,6 +90,8 @@ Gunakan URL project Supabase untuk `NEXT_PUBLIC_SUPABASE_URL`, misalnya `https:/
 
 Di production, data admin disimpan ke Supabase. Jika `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, atau `SUPABASE_SERVICE_ROLE_KEY` belum benar di Vercel, halaman akan memakai data demo dan perubahan admin tidak akan tersimpan.
 
+Secara default, konten publik memakai data yang tersimpan di kode (`src/lib/demo-data.ts`) agar hasil deploy sama dengan perubahan lokal. Jika ingin membaca konten dari Supabase, set `CONTENT_SOURCE=supabase` di Vercel.
+
 ```bash
 git add .
 git commit -m "update project"
