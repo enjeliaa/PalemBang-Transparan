@@ -32,6 +32,13 @@ export async function POST(request: Request) {
     return NextResponse.json(data);
   }
 
+  if (process.env.VERCEL === "1") {
+    return NextResponse.json(
+      { error: "Supabase belum dikonfigurasi di Vercel. Isi NEXT_PUBLIC_SUPABASE_URL dan SUPABASE_SERVICE_ROLE_KEY." },
+      { status: 500 },
+    );
+  }
+
   const post = await createLocalPost(payload);
   return NextResponse.json({ ...post, demo: true });
 }

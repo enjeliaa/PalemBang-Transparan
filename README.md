@@ -86,6 +86,9 @@ File tersebut membuat tabel, policy, bucket storage, dan data awal.
 ## Deploy
 
 Project ini dapat dideploy ke Vercel. Pastikan semua environment variables sudah diisi di Vercel sebelum deploy.
+Gunakan URL project Supabase untuk `NEXT_PUBLIC_SUPABASE_URL`, misalnya `https://your-project-ref.supabase.co`, bukan URL REST API yang berakhiran `/rest/v1`.
+
+Di production, data admin disimpan ke Supabase. Jika `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, atau `SUPABASE_SERVICE_ROLE_KEY` belum benar di Vercel, halaman akan memakai data demo dan perubahan admin tidak akan tersimpan.
 
 ```bash
 git add .

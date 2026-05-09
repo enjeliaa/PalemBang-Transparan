@@ -27,6 +27,13 @@ export async function PATCH(request: Request, { params }: Props) {
     return NextResponse.json(data);
   }
 
+  if (process.env.VERCEL === "1") {
+    return NextResponse.json(
+      { error: "Supabase belum dikonfigurasi di Vercel. Isi NEXT_PUBLIC_SUPABASE_URL dan SUPABASE_SERVICE_ROLE_KEY." },
+      { status: 500 },
+    );
+  }
+
   const post = await updateLocalPost(id, body);
   if (!post) return NextResponse.json({ error: "Postingan tidak ditemukan." }, { status: 404 });
   return NextResponse.json({ ...post, demo: true });
@@ -42,6 +49,14 @@ export async function DELETE(_request: Request, { params }: Props) {
   if (hasSupabaseAdminEnv && supabaseAdmin) {
     const { error } = await supabaseAdmin.from("posts").delete().eq("id", id);
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json({ id, deleted: true });
+  }
+
+  if (process.env.VERCEL === "1") {
+    return NextResponse.json(
+      { error: "Supabase belum dikonfigurasi di Vercel. Isi NEXT_PUBLIC_SUPABASE_URL dan SUPABASE_SERVICE_ROLE_KEY." },
+      { status: 500 },
+    );
   }
 
   await deleteLocalPost(id);
