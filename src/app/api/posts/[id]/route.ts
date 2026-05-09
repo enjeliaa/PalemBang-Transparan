@@ -20,11 +20,18 @@ export async function PATCH(request: Request, { params }: Props) {
       .from("posts")
       .update(body)
       .eq("id", id)
-      .select("*")
-      .single();
+      .select("*");
 
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-    return NextResponse.json(data);
+    if (data?.[0]) return NextResponse.json(data[0]);
+
+    const { data: upsertedData, error: upsertError } = await supabaseAdmin
+      .from("posts")
+      .upsert(body, { onConflict: "slug" })
+      .select("*");
+
+    if (upsertError) return NextResponse.json({ error: upsertError.message }, { status: 500 });
+    return NextResponse.json(upsertedData?.[0] ?? body);
   }
 
   if (process.env.VERCEL === "1") {

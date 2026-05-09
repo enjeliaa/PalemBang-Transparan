@@ -27,9 +27,9 @@ export async function POST(request: Request) {
   };
 
   if (hasSupabaseAdminEnv && supabaseAdmin) {
-    const { data, error } = await supabaseAdmin.from("posts").insert(payload).select("*").single();
+    const { data, error } = await supabaseAdmin.from("posts").insert(payload).select("*");
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-    return NextResponse.json(data);
+    return NextResponse.json(data?.[0] ?? payload);
   }
 
   if (process.env.VERCEL === "1") {

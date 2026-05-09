@@ -27,8 +27,8 @@ export function AdminPostForm({ mode, post }: Props) {
   }
 
   async function uploadMedia(file: File, target: "thumbnail" | "video") {
-    if (target === "video" && file.size > 4 * 1024 * 1024) {
-      setMessage("Upload video besar tidak bisa lewat Vercel. Masukkan URL YouTube/embed atau URL video dari Supabase Storage.");
+    if (target === "video" && file.size > 45 * 1024 * 1024) {
+      setMessage("Video terlalu besar untuk upload lewat form. Pakai URL YouTube/embed atau upload ke Supabase Storage lalu tempel URL publiknya.");
       return;
     }
 
