@@ -11,6 +11,7 @@ type LocalDatabase = {
 
 const dataDirectory = path.join(process.cwd(), "data");
 const databasePath = path.join(dataDirectory, "local-db.json");
+const demoDataPath = path.join(process.cwd(), "src", "lib", "demo-data.ts");
 const isVercel = process.env.VERCEL === "1";
 
 function getDemoDatabase(): LocalDatabase {
@@ -56,6 +57,20 @@ async function writeLocalDatabase(database: LocalDatabase) {
 
   await ensureLocalDatabase();
   await writeFile(databasePath, JSON.stringify(database, null, 2), "utf8");
+  await writeDemoData(database);
+}
+
+async function writeDemoData(database: LocalDatabase) {
+  const content = `import type { BudgetItem, Comment, Post } from "@/types";
+
+export const demoPosts: Post[] = ${JSON.stringify(database.posts, null, 2)};
+
+export const demoBudgetItems: BudgetItem[] = ${JSON.stringify(database.budgetItems, null, 2)};
+
+export const demoComments: Comment[] = ${JSON.stringify(database.comments, null, 2)};
+`;
+
+  await writeFile(demoDataPath, content, "utf8");
 }
 
 export async function getLocalPosts() {

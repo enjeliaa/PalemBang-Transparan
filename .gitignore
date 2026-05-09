@@ -26,6 +26,9 @@
 *.pem
 /data/local-db.json
 /public/uploads/
+!/public/uploads/
+!/public/uploads/posts/
+!/public/uploads/posts/**
 
 # debug
 npm-debug.log*
