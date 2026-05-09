@@ -4,6 +4,8 @@ const stopwords = new Set([
   "yang", "dan", "di", "ke", "dari", "untuk", "dengan", "ini", "itu", "ada",
   "agar", "mohon", "tolong", "sudah", "masih", "lebih", "kami", "saya",
   "warga", "palembang", "pada", "dalam", "atau", "jadi", "bisa", "buat",
+  "pak", "bu", "dekat", "sekitar", "kalau", "saat", "hari", "minggu",
+  "musim", "hujan", "nyalahke", "nyalakan", "tolonglah", "harap",
 ]);
 
 const issueKeywords = [
@@ -124,10 +126,12 @@ export function getKeywordAnalytics(comments: Comment[]) {
   for (const row of organicRows) merged.set(row.keyword, row);
   for (const row of issueRows) merged.set(row.keyword, row);
 
-  return [...merged.values()]
+  const rows = [...merged.values()]
     .sort((a, b) => {
       const urgencyRank = { Kritis: 4, Tinggi: 3, Sedang: 2, Normal: 1 } as Record<string, number>;
       return b.count - a.count || urgencyRank[b.urgency] - urgencyRank[a.urgency];
     })
     .slice(0, 10);
+
+  return rows.filter((row) => row.monitored || row.count > 1);
 }

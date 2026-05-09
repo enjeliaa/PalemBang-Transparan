@@ -29,6 +29,24 @@ function mergePosts(localPosts: Post[], supabasePosts: Post[]) {
   return sortPosts([...merged.values()]);
 }
 
+function sortComments(comments: Comment[]) {
+  return comments.sort(
+    (a, b) =>
+      Number(b.is_pinned) - Number(a.is_pinned) ||
+      new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+  );
+}
+
+function mergeComments(localComments: Comment[], supabaseComments: Comment[]) {
+  const merged = new Map(localComments.map((comment) => [comment.id, comment]));
+
+  for (const comment of supabaseComments) {
+    merged.set(comment.id, comment);
+  }
+
+  return sortComments([...merged.values()]);
+}
+
 export async function getPosts(): Promise<Post[]> {
   const localPosts = await getLocalPosts();
   if (!hasSupabaseEnv || !supabase) return localPosts;
@@ -87,7 +105,7 @@ export async function getComments(postId?: string): Promise<Comment[]> {
 
   const { data, error } = await query;
   if (error || !data?.length) return fallback;
-  return data as Comment[];
+  return mergeComments(fallback, data as Comment[]);
 }
 
 export async function getDashboardStats() {

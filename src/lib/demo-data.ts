@@ -146,114 +146,117 @@ export const demoBudgetItems: BudgetItem[] = [
 
 export const demoComments: Comment[] = [
   {
-    "id": "01fdf4e1-341a-4324-bee8-7dd9ee0ac6d9",
-    "created_at": "2026-05-09T14:00:13.490Z",
-    "post_id": "post-2",
-    "anonymous_name": "Warga Palembang #1188",
-    "content_raw": "masih banjir pak",
-    "content_filtered": "masih banjir pak",
+    "id": "c-drainase-1",
+    "post_id": "27c6664e-55d9-43a4-8db8-23344f7fa08f",
+    "anonymous_name": "Warga Palembang #1428",
+    "content_raw": "Genangan air di kawasan Angkatan 45 masih cepat naik kalau hujan deras. Saluran drainase dekat simpang perlu dibersihkan dulu.",
+    "content_filtered": "Genangan air di kawasan Angkatan 45 masih cepat naik kalau hujan deras. Saluran drainase dekat simpang perlu dibersihkan dulu.",
     "is_filtered": false,
-    "is_pinned": false,
-    "is_deleted": false
+    "is_pinned": true,
+    "is_deleted": false,
+    "admin_reply": "Tim teknis akan mengecek titik penyempitan saluran dan jadwal pembersihan drainase di kawasan Angkatan 45.",
+    "created_at": "2026-05-09T14:00:13.490Z"
   },
   {
-    "id": "528956bf-76fa-49a3-a639-eaadd0c76ceb",
-    "created_at": "2026-05-09T13:59:55.629Z",
-    "post_id": "post-1",
-    "anonymous_name": "Warga Palembang #1188",
-    "content_raw": "masih banjir pak",
-    "content_filtered": "masih banjir pak",
-    "is_filtered": false,
-    "is_pinned": false,
-    "is_deleted": false
-  },
-  {
-    "id": "4db4ba1b-46f6-4315-8ba9-629c719aa566",
-    "created_at": "2026-05-09T13:59:11.202Z",
+    "id": "c-drainase-2",
     "post_id": "27c6664e-55d9-43a4-8db8-23344f7fa08f",
     "anonymous_name": "Warga Palembang #1188",
-    "content_raw": "banjir pak",
-    "content_filtered": "banjir pak",
+    "content_raw": "Mohon normalisasi drainase diprioritaskan karena air masuk ke halaman rumah saat hujan sore.",
+    "content_filtered": "Mohon normalisasi drainase diprioritaskan karena air masuk ke halaman rumah saat hujan sore.",
     "is_filtered": false,
     "is_pinned": false,
-    "is_deleted": false
-  },
-  {
-    "id": "c1",
-    "post_id": "post-1",
-    "anonymous_name": "Warga Palembang #1428",
-    "content_raw": "Drainase di dekat halte masih sering mampet saat hujan deras.",
-    "content_filtered": "Drainase di dekat halte masih sering mampet saat hujan deras.",
-    "is_filtered": false,
-    "is_pinned": true,
     "is_deleted": false,
-    "admin_reply": "Tim PUPR sudah menjadwalkan pengecekan tambahan minggu ini.",
-    "created_at": "2026-05-06T08:15:27.395Z"
+    "created_at": "2026-05-09T13:59:11.202Z"
   },
   {
-    "id": "c2",
+    "id": "c-sampah-1",
     "post_id": "post-1",
     "anonymous_name": "Warga Palembang #7321",
-    "content_raw": "Tolong perhatikan akses kursi roda di depan toko lama.",
-    "content_filtered": "Tolong perhatikan akses kursi roda di depan toko lama.",
-    "is_filtered": false,
-    "is_pinned": false,
-    "is_deleted": false,
-    "created_at": "2026-05-06T07:05:27.395Z"
-  },
-  {
-    "id": "c3",
-    "post_id": "post-1",
-    "anonymous_name": "Warga Palembang #8042",
-    "content_raw": "Pekerjaan malam jangan terlalu bising.",
-    "content_filtered": "Pekerjaan malam jangan terlalu bising.",
-    "is_filtered": false,
-    "is_pinned": false,
-    "is_deleted": false,
-    "created_at": "2026-05-06T05:35:27.395Z"
-  },
-  {
-    "id": "c4",
-    "post_id": "post-2",
-    "anonymous_name": "Warga Palembang #2219",
-    "content_raw": "Jalan dekat sekolah sudah jauh lebih baik.",
-    "content_filtered": "Jalan dekat sekolah sudah jauh lebih baik.",
-    "is_filtered": false,
-    "is_pinned": false,
-    "is_deleted": false,
-    "created_at": "2026-05-06T03:55:27.395Z"
-  },
-  {
-    "id": "c5",
-    "post_id": "post-3",
-    "anonymous_name": "Warga Palembang #1190",
-    "content_raw": "Taman butuh lampu dan toilet yang bersih.",
-    "content_filtered": "Taman butuh lampu dan toilet yang bersih.",
+    "content_raw": "TPS sekitar Kramasan sering penuh dan bau. Semoga PSEL benar-benar mengurangi sampah harian.",
+    "content_filtered": "TPS sekitar Kramasan sering penuh dan bau. Semoga PSEL benar-benar mengurangi sampah harian.",
     "is_filtered": false,
     "is_pinned": true,
     "is_deleted": false,
-    "created_at": "2026-05-05T19:15:27.395Z"
+    "admin_reply": "Masukan terkait TPS Kramasan akan diteruskan ke tim kebersihan sambil menunggu tahapan PSEL berjalan.",
+    "created_at": "2026-05-09T13:40:00.000Z"
   },
   {
-    "id": "c6",
+    "id": "c-sampah-2",
+    "post_id": "post-1",
+    "anonymous_name": "Warga Palembang #8042",
+    "content_raw": "Pengangkutan sampah perlu tetap rutin, jangan menunggu fasilitas PSEL selesai dulu.",
+    "content_filtered": "Pengangkutan sampah perlu tetap rutin, jangan menunggu fasilitas PSEL selesai dulu.",
+    "is_filtered": false,
+    "is_pinned": false,
+    "is_deleted": false,
+    "created_at": "2026-05-09T12:20:00.000Z"
+  },
+  {
+    "id": "c-sekolah-1",
+    "post_id": "post-2",
+    "anonymous_name": "Warga Palembang #2219",
+    "content_raw": "Jam pulang sekolah di simpang SDN 110 sering macet. Marka jalan dan petugas penyeberangan sangat dibutuhkan.",
+    "content_filtered": "Jam pulang sekolah di simpang SDN 110 sering macet. Marka jalan dan petugas penyeberangan sangat dibutuhkan.",
+    "is_filtered": false,
+    "is_pinned": true,
+    "is_deleted": false,
+    "admin_reply": "Dinas Perhubungan akan mengecek kebutuhan marka dan pengaturan lalu lintas pada jam sekolah.",
+    "created_at": "2026-05-09T11:50:00.000Z"
+  },
+  {
+    "id": "c-sekolah-2",
+    "post_id": "post-2",
+    "anonymous_name": "Warga Palembang #3371",
+    "content_raw": "Mohon rambu zona sekolah dipasang jelas karena kendaraan sering melaju kencang dekat gerbang.",
+    "content_filtered": "Mohon rambu zona sekolah dipasang jelas karena kendaraan sering melaju kencang dekat gerbang.",
+    "is_filtered": false,
+    "is_pinned": false,
+    "is_deleted": false,
+    "created_at": "2026-05-09T10:10:00.000Z"
+  },
+  {
+    "id": "c-cfn-1",
+    "post_id": "post-3",
+    "anonymous_name": "Warga Palembang #1190",
+    "content_raw": "Car Free Night bagus, tapi parkir liar di sekitar Jalan Kolonel Atmo bikin macet setelah acara selesai.",
+    "content_filtered": "Car Free Night bagus, tapi parkir liar di sekitar Jalan Kolonel Atmo bikin macet setelah acara selesai.",
+    "is_filtered": false,
+    "is_pinned": false,
+    "is_deleted": false,
+    "created_at": "2026-05-08T20:15:00.000Z"
+  },
+  {
+    "id": "c-bundaran-1",
     "post_id": "post-4",
     "anonymous_name": "Warga Palembang #6720",
-    "content_raw": "Lampu baru membantu pedagang pulang malam.",
-    "content_filtered": "Lampu baru membantu pedagang pulang malam.",
+    "content_raw": "Lampu jalan di sekitar bundaran sudah bagus, tapi toilet umum dan tempat sampah perlu ditambah.",
+    "content_filtered": "Lampu jalan di sekitar bundaran sudah bagus, tapi toilet umum dan tempat sampah perlu ditambah.",
     "is_filtered": false,
     "is_pinned": false,
     "is_deleted": false,
-    "created_at": "2026-05-05T12:35:27.395Z"
+    "created_at": "2026-05-08T13:35:00.000Z"
   },
   {
-    "id": "c7",
+    "id": "c-jalan-1",
     "post_id": "post-5",
     "anonymous_name": "Warga Palembang #4381",
-    "content_raw": "Mohon antrean layanan dibuat jelas.",
-    "content_filtered": "Mohon antrean layanan dibuat jelas.",
+    "content_raw": "Akses Soak Bujang sudah lebih baik, tapi beberapa bahu jalan masih berlubang dan perlu dirapikan.",
+    "content_filtered": "Akses Soak Bujang sudah lebih baik, tapi beberapa bahu jalan masih berlubang dan perlu dirapikan.",
+    "is_filtered": false,
+    "is_pinned": true,
+    "is_deleted": false,
+    "admin_reply": "Catatan bahu jalan akan diteruskan untuk pengecekan masa pemeliharaan pekerjaan.",
+    "created_at": "2026-05-08T09:55:00.000Z"
+  },
+  {
+    "id": "c-jalan-2",
+    "post_id": "post-5",
+    "anonymous_name": "Warga Palembang #5194",
+    "content_raw": "Mohon drainase pinggir jalan ikut dibersihkan supaya jalan tidak cepat rusak lagi saat hujan.",
+    "content_filtered": "Mohon drainase pinggir jalan ikut dibersihkan supaya jalan tidak cepat rusak lagi saat hujan.",
     "is_filtered": false,
     "is_pinned": false,
     "is_deleted": false,
-    "created_at": "2026-05-05T05:55:27.395Z"
+    "created_at": "2026-05-08T08:25:00.000Z"
   }
 ];

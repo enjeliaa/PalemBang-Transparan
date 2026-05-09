@@ -4,7 +4,7 @@ import { useState } from "react";
 import { RefreshCw } from "lucide-react";
 
 const initialSummary =
-  "Dashboard ini tidak membuat isu sendiri. Kata seperti banjir, korupsi, narkoba, atau jalan rusak baru muncul jika warga menuliskannya di kolom komentar.";
+  "Ringkasan ini disusun dari komentar warga yang tercatat pada artikel, bukan dari data contoh terpisah.";
 
 export function AiSummaryPanel() {
   const [summary, setSummary] = useState(initialSummary);
