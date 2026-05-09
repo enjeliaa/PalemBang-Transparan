@@ -12,16 +12,6 @@ export async function PATCH(request: Request, { params }: Props) {
     return NextResponse.json({ error: "Hanya admin pemerintah yang boleh mengedit postingan." }, { status: 403 });
   }
 
-  if (process.env.VERCEL === "1" && process.env.CONTENT_SOURCE !== "supabase") {
-    return NextResponse.json(
-      {
-        error:
-          "Admin di Vercel sedang memakai mode konten lokal. Buat/edit postingan dari localhost lalu commit/push, atau set CONTENT_SOURCE=supabase dan konfigurasi Supabase.",
-      },
-      { status: 500 },
-    );
-  }
-
   const { id } = await params;
   const body = await request.json();
 
@@ -41,7 +31,7 @@ export async function PATCH(request: Request, { params }: Props) {
     return NextResponse.json(
       {
         error:
-          "Mode deploy saat ini memakai data dari kode. Postingan tidak bisa disimpan permanen dari Vercel. Edit di localhost lalu commit/push, atau aktifkan Supabase untuk konten.",
+          "Supabase belum siap untuk mengedit postingan dari Vercel. Isi NEXT_PUBLIC_SUPABASE_URL dan SUPABASE_SERVICE_ROLE_KEY di Vercel.",
       },
       { status: 500 },
     );
@@ -57,16 +47,6 @@ export async function DELETE(_request: Request, { params }: Props) {
     return NextResponse.json({ error: "Hanya admin pemerintah yang boleh menghapus postingan." }, { status: 403 });
   }
 
-  if (process.env.VERCEL === "1" && process.env.CONTENT_SOURCE !== "supabase") {
-    return NextResponse.json(
-      {
-        error:
-          "Admin di Vercel sedang memakai mode konten lokal. Hapus postingan dari localhost lalu commit/push, atau set CONTENT_SOURCE=supabase dan konfigurasi Supabase.",
-      },
-      { status: 500 },
-    );
-  }
-
   const { id } = await params;
 
   if (hasSupabaseAdminEnv && supabaseAdmin) {
@@ -79,7 +59,7 @@ export async function DELETE(_request: Request, { params }: Props) {
     return NextResponse.json(
       {
         error:
-          "Mode deploy saat ini memakai data dari kode. Postingan tidak bisa dihapus permanen dari Vercel. Edit di localhost lalu commit/push, atau aktifkan Supabase untuk konten.",
+          "Supabase belum siap untuk menghapus postingan dari Vercel. Isi NEXT_PUBLIC_SUPABASE_URL dan SUPABASE_SERVICE_ROLE_KEY di Vercel.",
       },
       { status: 500 },
     );

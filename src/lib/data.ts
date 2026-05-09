@@ -2,24 +2,50 @@ import { getLocalBudgetItems, getLocalComments, getLocalPosts } from "@/lib/loca
 import { hasSupabaseEnv, supabase } from "@/lib/supabase";
 import type { BudgetItem, Comment, Post } from "@/types";
 
-const useSupabaseContent = process.env.CONTENT_SOURCE === "supabase";
+function sortPosts(posts: Post[]) {
+  return posts.sort(
+    (a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime(),
+  );
+}
+
+function getLatestPostTime(posts: Post[]) {
+  return Math.max(...posts.map((post) => new Date(post.published_at).getTime()), 0);
+}
+
+function shouldUseSupabasePost(post: Post, localPosts: Post[]) {
+  const localSlugs = new Set(localPosts.map((localPost) => localPost.slug));
+  return localSlugs.has(post.slug) || new Date(post.published_at).getTime() > getLatestPostTime(localPosts);
+}
+
+function mergePosts(localPosts: Post[], supabasePosts: Post[]) {
+  const merged = new Map(localPosts.map((post) => [post.slug, post]));
+
+  for (const post of supabasePosts) {
+    if (shouldUseSupabasePost(post, localPosts)) {
+      merged.set(post.slug, post);
+    }
+  }
+
+  return sortPosts([...merged.values()]);
+}
 
 export async function getPosts(): Promise<Post[]> {
-  if (!useSupabaseContent || !hasSupabaseEnv || !supabase) return getLocalPosts();
+  const localPosts = await getLocalPosts();
+  if (!hasSupabaseEnv || !supabase) return localPosts;
 
   const { data, error } = await supabase
     .from("posts")
     .select("*")
     .order("published_at", { ascending: false });
 
-  if (error || !data?.length) return getLocalPosts();
-  return data as Post[];
+  if (error || !data?.length) return localPosts;
+  return mergePosts(localPosts, data as Post[]);
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   const localPosts = await getLocalPosts();
   const fallback = localPosts.find((post) => post.slug === slug) ?? null;
-  if (!useSupabaseContent || !hasSupabaseEnv || !supabase) return fallback;
+  if (!hasSupabaseEnv || !supabase) return fallback;
 
   const { data, error } = await supabase
     .from("posts")
@@ -28,12 +54,13 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     .single();
 
   if (error || !data) return fallback;
-  return data as Post;
+  const post = data as Post;
+  return shouldUseSupabasePost(post, localPosts) ? post : fallback;
 }
 
 export async function getBudgetItems(postId: string): Promise<BudgetItem[]> {
   const fallback = await getLocalBudgetItems(postId);
-  if (!useSupabaseContent || !hasSupabaseEnv || !supabase) return fallback;
+  if (!hasSupabaseEnv || !supabase) return fallback;
 
   const { data, error } = await supabase
     .from("budget_items")
@@ -47,7 +74,7 @@ export async function getBudgetItems(postId: string): Promise<BudgetItem[]> {
 export async function getComments(postId?: string): Promise<Comment[]> {
   const fallback = await getLocalComments(postId);
 
-  if (!useSupabaseContent || !hasSupabaseEnv || !supabase) return fallback;
+  if (!hasSupabaseEnv || !supabase) return fallback;
 
   let query = supabase
     .from("comments")
