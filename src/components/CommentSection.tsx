@@ -21,6 +21,7 @@ export function CommentSection({ postId, initialComments }: { postId: string; in
   const [comments, setComments] = useState(initialComments);
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(3);
 
   const sortedComments = useMemo(
     () => [...comments].sort((a, b) => Number(b.is_pinned) - Number(a.is_pinned) || new Date(b.created_at).getTime() - new Date(a.created_at).getTime()),
@@ -83,7 +84,7 @@ export function CommentSection({ postId, initialComments }: { postId: string; in
       </form>
 
       <div className="space-y-4">
-        {sortedComments.length > 0 ? sortedComments.map((comment) => (
+        {sortedComments.length > 0 ? sortedComments.slice(0, visibleCount).map((comment) => (
           <article key={comment.id} className={`border-l-4 ${comment.is_pinned ? "border-[#F5A623]" : "border-[#C8102E]"} rounded-r bg-zinc-50 p-4`}>
             <div className="flex items-start gap-3">
               <div className="grid size-10 shrink-0 place-items-center rounded-full bg-[#1A1A2E] font-black text-white">{comment.anonymous_name.slice(-4, -3)}</div>
@@ -110,6 +111,17 @@ export function CommentSection({ postId, initialComments }: { postId: string; in
           </div>
         )}
       </div>
+      {sortedComments.length > visibleCount && (
+        <div className="mt-5 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setVisibleCount((count) => Math.min(count + 5, sortedComments.length))}
+            className="rounded border border-zinc-300 px-4 py-2 text-sm font-black text-[#1A1A2E] hover:border-[#C8102E] hover:text-[#C8102E]"
+          >
+            Lihat lebih banyak komentar ({sortedComments.length - visibleCount} lagi)
+          </button>
+        </div>
+      )}
     </section>
   );
 }

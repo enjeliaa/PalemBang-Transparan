@@ -91,12 +91,11 @@ export async function getCommentsForPost(post: Post): Promise<Comment[]> {
     .from("comments")
     .select("*")
     .in("post_id", [...postIds])
-    .eq("is_deleted", false)
     .order("is_pinned", { ascending: false })
     .order("created_at", { ascending: false });
 
   if (error || !data?.length) return fallback;
-  return mergeComments(fallback, data as Comment[]);
+  return mergeComments(fallback, data as Comment[]).filter((comment) => !comment.is_deleted);
 }
 
 export async function getBudgetItems(postId: string): Promise<BudgetItem[]> {
@@ -120,7 +119,6 @@ export async function getComments(postId?: string): Promise<Comment[]> {
   let query = supabase
     .from("comments")
     .select("*")
-    .eq("is_deleted", false)
     .order("is_pinned", { ascending: false })
     .order("created_at", { ascending: false });
 
@@ -128,7 +126,7 @@ export async function getComments(postId?: string): Promise<Comment[]> {
 
   const { data, error } = await query;
   if (error || !data?.length) return fallback;
-  return mergeComments(fallback, data as Comment[]);
+  return mergeComments(fallback, data as Comment[]).filter((comment) => !comment.is_deleted);
 }
 
 export async function getDashboardStats() {

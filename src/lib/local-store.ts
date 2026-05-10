@@ -149,3 +149,25 @@ export async function deleteLocalPost(id: string) {
   database.comments = database.comments.filter((comment) => comment.post_id !== id);
   await writeLocalDatabase(database);
 }
+
+export async function updateLocalComment(id: string, payload: Partial<Comment>) {
+  const database = await readLocalDatabase();
+  const index = database.comments.findIndex((comment) => comment.id === id);
+
+  if (index === -1) return null;
+
+  database.comments[index] = {
+    ...database.comments[index],
+    ...payload,
+    id,
+  };
+
+  await writeLocalDatabase(database);
+  return database.comments[index];
+}
+
+export async function deleteLocalComment(id: string) {
+  const database = await readLocalDatabase();
+  database.comments = database.comments.filter((comment) => comment.id !== id);
+  await writeLocalDatabase(database);
+}
