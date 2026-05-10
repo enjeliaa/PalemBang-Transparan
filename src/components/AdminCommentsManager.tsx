@@ -61,7 +61,9 @@ export function AdminCommentsManager({ initialComments, posts }: Props) {
 
     const response = await fetch(`/api/comments/${comment.id}`, {
       method: "DELETE",
+      headers: { "Content-Type": "application/json" },
       credentials: "include",
+      body: JSON.stringify(comment),
     });
 
     setLoadingId("");

@@ -37,14 +37,22 @@ function sortComments(comments: Comment[]) {
   );
 }
 
+function getCommentMergeKey(comment: Comment) {
+  return `${comment.anonymous_name}:${comment.content_raw || comment.content_filtered}`.toLowerCase();
+}
+
 function mergeComments(localComments: Comment[], supabaseComments: Comment[]) {
-  const merged = new Map(localComments.map((comment) => [comment.id, comment]));
+  const merged = new Map(localComments.map((comment) => [getCommentMergeKey(comment), comment]));
 
   for (const comment of supabaseComments) {
-    merged.set(comment.id, comment);
+    merged.set(getCommentMergeKey(comment), comment);
   }
 
   return sortComments([...merged.values()]);
+}
+
+function isUuid(value: string) {
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
 }
 
 export async function getPosts(): Promise<Post[]> {
@@ -87,10 +95,23 @@ export async function getCommentsForPost(post: Post): Promise<Comment[]> {
 
   if (!hasSupabaseEnv || !supabase) return fallback;
 
+  if (![...postIds].some(isUuid)) {
+    const { data: supabasePost } = await supabase
+      .from("posts")
+      .select("id")
+      .eq("slug", post.slug)
+      .maybeSingle();
+
+    if (supabasePost?.id) postIds.add(supabasePost.id);
+  }
+
+  const supabasePostIds = [...postIds].filter(isUuid);
+  if (!supabasePostIds.length) return fallback;
+
   const { data, error } = await supabase
     .from("comments")
     .select("*")
-    .in("post_id", [...postIds])
+    .in("post_id", supabasePostIds)
     .order("is_pinned", { ascending: false })
     .order("created_at", { ascending: false });
 

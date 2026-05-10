@@ -8,6 +8,10 @@ type Props = {
   params: Promise<{ id: string }>;
 };
 
+function isUuid(value: string) {
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
+}
+
 export async function PATCH(request: Request, { params }: Props) {
   if (!(await isAdmin())) {
     return NextResponse.json({ error: "Hanya admin pemerintah yang boleh mengedit postingan." }, { status: 403 });
@@ -18,14 +22,16 @@ export async function PATCH(request: Request, { params }: Props) {
   if ("video_url" in body) body.video_url = normalizeVideoUrl(body.video_url);
 
   if (hasSupabaseAdminEnv && supabaseAdmin) {
-    const { data, error } = await supabaseAdmin
-      .from("posts")
-      .update(body)
-      .eq("id", id)
-      .select("*");
+    if (isUuid(id)) {
+      const { data, error } = await supabaseAdmin
+        .from("posts")
+        .update(body)
+        .eq("id", id)
+        .select("*");
 
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-    if (data?.[0]) return NextResponse.json(data[0]);
+      if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+      if (data?.[0]) return NextResponse.json(data[0]);
+    }
 
     const { data: upsertedData, error: upsertError } = await supabaseAdmin
       .from("posts")
@@ -59,6 +65,10 @@ export async function DELETE(_request: Request, { params }: Props) {
   const { id } = await params;
 
   if (hasSupabaseAdminEnv && supabaseAdmin) {
+    if (!isUuid(id)) {
+      return NextResponse.json({ id, deleted: true, transient: true });
+    }
+
     const { error } = await supabaseAdmin.from("posts").delete().eq("id", id);
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
     return NextResponse.json({ id, deleted: true });
