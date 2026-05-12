@@ -10,11 +10,11 @@ export function VideoHero() {
         alt="Jembatan Ampera Palembang pada malam hari"
         fill
         priority
-        className="object-cover object-center brightness-110"
+        className="object-contain object-center brightness-110 sm:object-cover"
         sizes="100vw"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A2E]/85 via-[#1A1A2E]/55 to-[#C8102E]/35" />
-      <div className="absolute inset-0 bg-black/10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A2E]/40 via-[#1A1A2E]/65 to-[#1A1A2E]/90 sm:bg-gradient-to-r sm:from-[#1A1A2E]/85 sm:via-[#1A1A2E]/55 sm:to-[#C8102E]/35" />
+      <div className="absolute inset-0 bg-black/5 sm:bg-black/10" />
       <div className="relative mx-auto flex min-h-[520px] max-w-7xl flex-col justify-center px-4 py-20 lg:px-6">
         <p className="mb-4 w-fit rounded bg-[#F5A623] px-3 py-1 text-sm font-black uppercase text-[#1A1A2E] animate-fade-in">
           Portal Resmi Transparansi Pembangunan
