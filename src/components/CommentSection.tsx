@@ -16,11 +16,12 @@ function getAnonymousName() {
   return name;
 }
 
-export function CommentSection({ postId, initialComments }: { postId: string; initialComments: Comment[] }) {
+export function CommentSection({ postId, postSlug, initialComments }: { postId: string; postSlug: string; initialComments: Comment[] }) {
   const [anonymousName] = useState(getAnonymousName);
   const [comments, setComments] = useState(initialComments);
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [visibleCount, setVisibleCount] = useState(3);
 
   const sortedComments = useMemo(
@@ -32,9 +33,10 @@ export function CommentSection({ postId, initialComments }: { postId: string; in
     event.preventDefault();
     if (!content.trim()) return;
     setLoading(true);
+    setError("");
 
     const optimistic = filterContent(content.trim());
-    const comment: Comment = {
+    const pendingComment: Comment = {
       id: crypto.randomUUID(),
       post_id: postId,
       anonymous_name: anonymousName,
@@ -46,14 +48,28 @@ export function CommentSection({ postId, initialComments }: { postId: string; in
       created_at: new Date().toISOString(),
     };
 
-    setComments((current) => [comment, ...current]);
+    setComments((current) => [pendingComment, ...current]);
     setContent("");
 
-    await fetch("/api/comments", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ postId, anonymousName, content: comment.content_raw }),
-    }).catch(() => null);
+    try {
+      const response = await fetch("/api/comments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ postId, postSlug, anonymousName, content: pendingComment.content_raw }),
+      });
+
+      const savedComment = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        throw new Error(savedComment?.error ?? "Komentar belum bisa disimpan.");
+      }
+
+      setComments((current) => current.map((comment) => (comment.id === pendingComment.id ? savedComment : comment)));
+    } catch (err) {
+      setComments((current) => current.filter((comment) => comment.id !== pendingComment.id));
+      setContent(pendingComment.content_raw);
+      setError(err instanceof Error ? err.message : "Komentar belum bisa disimpan.");
+    }
 
     setLoading(false);
   }
@@ -81,6 +97,7 @@ export function CommentSection({ postId, initialComments }: { postId: string; in
             <Send size={16} /> Kirim Komentar
           </button>
         </div>
+        {error && <p className="mt-3 rounded border border-red-200 bg-red-50 p-3 text-sm font-bold text-red-700">{error}</p>}
       </form>
 
       <div className="space-y-4">

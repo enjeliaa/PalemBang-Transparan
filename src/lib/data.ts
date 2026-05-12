@@ -38,7 +38,7 @@ function sortComments(comments: Comment[]) {
 }
 
 function getCommentMergeKey(comment: Comment) {
-  return `${comment.anonymous_name}:${comment.content_raw || comment.content_filtered}`.toLowerCase();
+  return `${comment.post_id ?? comment.post_slug ?? ""}:${comment.anonymous_name}:${comment.content_raw || comment.content_filtered}`.toLowerCase();
 }
 
 function mergeComments(localComments: Comment[], supabaseComments: Comment[]) {
@@ -90,7 +90,7 @@ export async function getCommentsForPost(post: Post): Promise<Comment[]> {
   const postIds = new Set([post.id, localPost?.id].filter(Boolean) as string[]);
   const fallback = mergeComments(
     [],
-    (await getLocalComments()).filter((comment) => postIds.has(comment.post_id)),
+    (await getLocalComments()).filter((comment) => (comment.post_id ? postIds.has(comment.post_id) : comment.post_slug === post.slug)),
   );
 
   if (!hasSupabaseEnv || !supabase) return fallback;
@@ -106,14 +106,20 @@ export async function getCommentsForPost(post: Post): Promise<Comment[]> {
   }
 
   const supabasePostIds = [...postIds].filter(isUuid);
-  if (!supabasePostIds.length) return fallback;
 
-  const { data, error } = await supabase
+  let query = supabase
     .from("comments")
     .select("*")
-    .in("post_id", supabasePostIds)
     .order("is_pinned", { ascending: false })
     .order("created_at", { ascending: false });
+
+  if (supabasePostIds.length) {
+    query = query.or(`post_id.in.(${supabasePostIds.join(",")}),post_slug.eq.${post.slug}`);
+  } else {
+    query = query.eq("post_slug", post.slug);
+  }
+
+  const { data, error } = await query;
 
   if (error || !data?.length) return fallback;
   return mergeComments(fallback, data as Comment[]).filter((comment) => !comment.is_deleted);

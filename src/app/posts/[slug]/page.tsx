@@ -63,7 +63,7 @@ export default async function PostDetailPage({ params }: Props) {
             ) : videoUrl ? (
               <video className="mt-8 aspect-video w-full rounded border border-zinc-200 bg-black" src={videoUrl} controls />
             ) : null}
-            <CommentSection postId={post.id} initialComments={comments} />
+            <CommentSection postId={post.id} postSlug={post.slug} initialComments={comments} />
           </article>
           <div className="lg:sticky lg:top-24 lg:self-start">
             <BudgetWidget post={post} items={budgetItems} />

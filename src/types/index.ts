@@ -28,7 +28,8 @@ export type BudgetItem = {
 
 export type Comment = {
   id: string;
-  post_id: string;
+  post_id: string | null;
+  post_slug?: string | null;
   anonymous_name: string;
   content_raw: string;
   content_filtered: string;

@@ -18,7 +18,10 @@ export function AdminCommentsManager({ initialComments, posts }: Props) {
   const [message, setMessage] = useState("");
   const [loadingId, setLoadingId] = useState("");
 
-  const postTitle = useMemo(() => new Map(posts.map((post) => [post.id, post.title])), [posts]);
+  const postTitle = useMemo(
+    () => new Map(posts.flatMap((post) => [[post.id, post.title], [post.slug, post.title]])),
+    [posts],
+  );
 
   async function readError(response: Response, fallback: string) {
     try {
@@ -91,7 +94,7 @@ export function AdminCommentsManager({ initialComments, posts }: Props) {
               <div>
                 <p className="font-black text-[#1A1A2E]">{comment.anonymous_name}</p>
                 <p className="mt-1 text-xs text-zinc-500">
-                  {postTitle.get(comment.post_id) ?? "Postingan terkait"} - {relativeTime(comment.created_at)}
+                  {postTitle.get(comment.post_id ?? "") ?? postTitle.get(comment.post_slug ?? "") ?? "Postingan terkait"} - {relativeTime(comment.created_at)}
                 </p>
               </div>
               <div className="flex gap-2">

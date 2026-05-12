@@ -39,7 +39,8 @@ create table if not exists budget_items (
 
 create table if not exists comments (
   id uuid primary key default gen_random_uuid(),
-  post_id uuid not null references posts(id) on delete cascade,
+  post_id uuid references posts(id) on delete cascade,
+  post_slug text,
   anonymous_name text not null,
   content_raw text not null,
   content_filtered text not null,
@@ -47,8 +48,15 @@ create table if not exists comments (
   is_pinned boolean not null default false,
   is_deleted boolean not null default false,
   admin_reply text,
-  created_at timestamptz not null default now()
+  created_at timestamptz not null default now(),
+  constraint comments_post_reference_check check (post_id is not null or post_slug is not null)
 );
+
+alter table comments add column if not exists post_slug text;
+alter table comments alter column post_id drop not null;
+alter table comments drop constraint if exists comments_post_reference_check;
+alter table comments add constraint comments_post_reference_check check (post_id is not null or post_slug is not null);
+create index if not exists comments_post_slug_idx on comments(post_slug);
 
 create table if not exists media (
   id uuid primary key default gen_random_uuid(),

@@ -1,11 +1,40 @@
 import { NextResponse } from "next/server";
 import { filterContent } from "@/lib/contentFilter";
-import { createLocalComment } from "@/lib/local-store";
+import { createLocalComment, getLocalPosts } from "@/lib/local-store";
 import { hasSupabaseEnv, supabase } from "@/lib/supabase";
+import { hasSupabaseAdminEnv, supabaseAdmin } from "@/lib/supabase-admin";
+
+function isUuid(value: string) {
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{12}$/i.test(value);
+}
+
+async function resolveSupabasePostId(postId: string, postSlug: string) {
+  const client = supabaseAdmin ?? supabase;
+  if (!client) return null;
+
+  let slug = postSlug;
+  if (!slug) {
+    const localPosts = await getLocalPosts();
+    slug = localPosts.find((post) => post.id === postId)?.slug ?? "";
+  }
+
+  if (!slug) return null;
+
+  const { data, error } = await client
+    .from("posts")
+    .select("id")
+    .eq("slug", slug)
+    .maybeSingle();
+
+  if (error) throw new Error(error.message);
+  if (data?.id) return data.id as string;
+  return postSlug ? null : isUuid(postId) ? postId : null;
+}
 
 export async function POST(request: Request) {
   const body = await request.json();
   const postId = String(body.postId ?? "");
+  const postSlug = String(body.postSlug ?? "");
   const anonymousName = String(body.anonymousName ?? "");
   const content = String(body.content ?? "").trim();
 
@@ -14,8 +43,22 @@ export async function POST(request: Request) {
   }
 
   const filtered = filterContent(content);
+  let postIdForStorage: string | null = isUuid(postId) ? postId : null;
+
+  if (hasSupabaseAdminEnv || hasSupabaseEnv) {
+    try {
+      postIdForStorage = await resolveSupabasePostId(postId, postSlug);
+    } catch (error) {
+      return NextResponse.json(
+        { error: error instanceof Error ? error.message : "Postingan Supabase gagal dicek." },
+        { status: 500 },
+      );
+    }
+  }
+
   const payload = {
-    post_id: postId,
+    post_id: postIdForStorage,
+    post_slug: postSlug || null,
     anonymous_name: anonymousName,
     content_raw: content,
     content_filtered: filtered.filtered,
@@ -24,11 +67,22 @@ export async function POST(request: Request) {
     is_deleted: false,
   };
 
-  if (hasSupabaseEnv && supabase) {
-    const { error } = await supabase.from("comments").insert(payload);
+  const client = supabaseAdmin ?? supabase;
+  if (client) {
+    const { data, error } = await client.from("comments").insert(payload).select("*");
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
-    return NextResponse.json({ ...payload, created_at: new Date().toISOString() });
+    return NextResponse.json(data?.[0] ?? { ...payload, created_at: new Date().toISOString() });
+  }
+
+  if (process.env.VERCEL === "1") {
+    return NextResponse.json(
+      {
+        error:
+          "Komentar belum bisa disimpan permanen karena Supabase belum terhubung di Vercel. Isi NEXT_PUBLIC_SUPABASE_URL dan SUPABASE_SERVICE_ROLE_KEY di Environment Variables.",
+      },
+      { status: 500 },
+    );
   }
 
   const comment = await createLocalComment(payload);
