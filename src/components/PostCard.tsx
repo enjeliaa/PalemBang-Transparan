@@ -7,7 +7,7 @@ export function PostCard({ post, featured = false }: { post: Post; featured?: bo
   return (
     <Link href={`/posts/${post.slug}`} className={`group block overflow-hidden rounded border border-zinc-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl ${featured ? "lg:row-span-2" : ""}`}>
       <div className={`relative ${featured ? "aspect-[16/10]" : "aspect-[16/9]"}`}>
-        <Image src={post.thumbnail_url} alt={post.title} fill className="object-cover transition duration-500 group-hover:scale-105" sizes={featured ? "(min-width: 1024px) 55vw, 100vw" : "(min-width: 1024px) 25vw, 100vw"} />
+        <Image src={post.thumbnail_url} alt={post.title} fill className="object-cover object-center brightness-105 transition duration-500 group-hover:scale-105" sizes={featured ? "(min-width: 1024px) 55vw, 100vw" : "(min-width: 1024px) 25vw, 100vw"} />
         <div className="absolute left-3 top-3 rounded bg-[#C8102E] px-2 py-1 text-xs font-black uppercase text-white">{post.category}</div>
       </div>
       <div className={featured ? "p-5" : "p-4"}>

@@ -42,8 +42,8 @@ export default async function PostDetailPage({ params }: Props) {
       <Navbar />
       <main className="bg-white">
         <section className="relative h-[420px] overflow-hidden bg-[#1A1A2E]">
-          <Image src={post.thumbnail_url} alt={post.title} fill priority className="object-cover opacity-75" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A2E] via-[#1A1A2E]/35 to-transparent" />
+          <Image src={post.thumbnail_url} alt={post.title} fill priority className="object-cover object-center brightness-105 opacity-85" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A2E]/95 via-[#1A1A2E]/30 to-transparent" />
           <div className="absolute bottom-0 left-1/2 w-full max-w-5xl -translate-x-1/2 px-4 pb-8 text-white">
             <span className="rounded bg-[#C8102E] px-3 py-1 text-sm font-black uppercase">{post.category}</span>
             <h1 className="mt-4 max-w-4xl font-serif text-4xl font-black leading-tight md:text-6xl">{post.title}</h1>
