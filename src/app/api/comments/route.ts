@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { filterContent } from "@/lib/contentFilter";
 import { createLocalComment, getLocalPosts } from "@/lib/local-store";
+import { getComments } from "@/lib/data";
 import { hasSupabaseEnv, supabase } from "@/lib/supabase";
 import { hasSupabaseAdminEnv, supabaseAdmin } from "@/lib/supabase-admin";
 
@@ -29,6 +30,22 @@ async function resolveSupabasePostId(postId: string, postSlug: string) {
   if (error) throw new Error(error.message);
   if (data?.id) return data.id as string;
   return postSlug ? null : isUuid(postId) ? postId : null;
+}
+
+export async function GET(request: Request) {
+  const url = new URL(request.url);
+  const anonymousName = url.searchParams.get("anonymousName")?.trim();
+
+  if (!anonymousName) {
+    return NextResponse.json({ error: "Nama anonim belum tersedia." }, { status: 400 });
+  }
+
+  const comments = await getComments();
+  const replies = comments.filter(
+    (comment) => comment.anonymous_name === anonymousName && Boolean(comment.admin_reply) && !comment.is_deleted,
+  );
+
+  return NextResponse.json(replies);
 }
 
 export async function POST(request: Request) {

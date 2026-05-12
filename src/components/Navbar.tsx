@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, Search, X } from "lucide-react";
+import { WargaNotifications } from "@/components/WargaNotifications";
 
 const navItems = [
   { label: "Beranda", href: "/" },
@@ -100,9 +101,12 @@ export function Navbar() {
           )}
         </div>
 
-        <button className="grid size-10 place-items-center rounded border border-zinc-200 lg:hidden" onClick={() => setOpen((value) => !value)} aria-label="Buka menu">
-          {open ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        <div className="flex items-center gap-2">
+          <WargaNotifications />
+          <button className="grid size-10 place-items-center rounded border border-zinc-200 lg:hidden" onClick={() => setOpen((value) => !value)} aria-label="Buka menu">
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
       </nav>
 
       {open && (

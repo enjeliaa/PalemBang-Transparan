@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
-import { Send, ShieldCheck } from "lucide-react";
+import { Bell, Send, ShieldCheck } from "lucide-react";
 import type { Comment } from "@/types";
 import { filterContent } from "@/lib/contentFilter";
 import { relativeTime } from "@/lib/utils";
@@ -27,6 +27,10 @@ export function CommentSection({ postId, postSlug, initialComments }: { postId: 
   const sortedComments = useMemo(
     () => [...comments].sort((a, b) => Number(b.is_pinned) - Number(a.is_pinned) || new Date(b.created_at).getTime() - new Date(a.created_at).getTime()),
     [comments],
+  );
+  const myRepliedComments = useMemo(
+    () => sortedComments.filter((comment) => comment.anonymous_name === anonymousName && comment.admin_reply),
+    [anonymousName, sortedComments],
   );
 
   async function submitComment(event: FormEvent<HTMLFormElement>) {
@@ -84,6 +88,17 @@ export function CommentSection({ postId, postSlug, initialComments }: { postId: 
           {sortedComments.length} komentar ditampilkan untuk postingan ini.
         </p>
       </div>
+
+      {myRepliedComments.length > 0 && (
+        <div className="mb-5 rounded border border-green-200 bg-green-50 p-4">
+          <p className="inline-flex items-center gap-2 text-sm font-black text-green-800">
+            <Bell size={16} /> Ada balasan resmi untuk komentar kamu di postingan ini.
+          </p>
+          <p className="mt-1 text-sm leading-6 text-green-900">
+            Cek kotak hijau “Jawaban Resmi Pemerintah” di komentar kamu, atau buka ikon lonceng di navbar untuk melihat semua balasan.
+          </p>
+        </div>
+      )}
 
       <form onSubmit={submitComment} className="mb-6">
         <textarea
