@@ -10,7 +10,7 @@ export function VideoHero() {
         alt="Jembatan Ampera Palembang pada malam hari"
         fill
         priority
-        className="object-cover object-[52%_50%] brightness-110 sm:object-center"
+        className="object-cover object-[44%_center] brightness-110 sm:object-center"
         sizes="100vw"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A2E]/82 via-[#1A1A2E]/50 to-[#C8102E]/25" />
